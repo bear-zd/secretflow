@@ -12,6 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Implementation of the paper Protecting Split Learning by Potential Energy Loss:
+# https://www.ijcai.org/proceedings/2024/0618.pdf.
+
+
 import types
 
 import torch

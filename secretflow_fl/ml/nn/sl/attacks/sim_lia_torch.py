@@ -58,6 +58,9 @@ def distance_based(measure="cosine"):
 
 
 def kmeans_based(collect_data: np.array, known_data: np.array, known_labels: dict):
+    # normalize the data before clustering will get better attack performance
+    collect_data = preprocessing.normalize(collect_data)
+    known_data = preprocessing.normalize(known_data)
 
     unique_labels = np.unique(known_labels)
     n_clusters = len(unique_labels)
@@ -160,7 +163,11 @@ class SimilarityLabelInferenceAttack(AttackCallback):
             self.known_num = 1
 
         self.attack_func = get_attack_method(self.attack_method, self.distance_metric)
-
+        print(
+            f"Using {self.attack_method} with {self.distance_metric} distance metric for attack.",
+            f"Known data number: {self.known_num}",
+            f"Data type: {self.data_type}",
+        )
         self.last_epoch = False
 
         self.res = None
